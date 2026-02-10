@@ -21,9 +21,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # --- THE FIX IS HERE ---
       - name: Set up Node
-        uses: actions/setup-node@v4  # Changed from node-latest to setup-node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
@@ -47,5 +46,4 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deplo
-        y-pages@v4
+        uses: actions/deploy-pages@v4
