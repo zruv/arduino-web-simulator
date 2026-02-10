@@ -61,7 +61,3 @@ This project completes all three tasks (Task 1, Task 2, and Task 3) as outlined 
 - **Task 2**: Auto-Wiring & Pin Configuration
 - **Task 3**: Code Generation & Simulation
 
-Detailed reports for each task are available in the root directory:
-- `Task1_Report.md`
-- `Task2_Report.md`
-- `Task3_Report.md`
