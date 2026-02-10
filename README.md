@@ -7,7 +7,7 @@ A visually intuitive, web-based Arduino simulator built for prototyping circuits
 
 ## 🎥 Demo Video
 
-<video src="https://github.com/zruv/arduino-web-simulator/raw/master/sim-video.mp4" controls="controls" width="100%"></video>
+<video src="sim-video.mp4" controls="controls" width="100%"></video>
 
 ## ✨ Key Features
 
