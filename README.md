@@ -1,63 +1,59 @@
-# Arduino Simulator Prototype - FOSSEE Screening Task
+# SimuDuino: Arduino Web Simulator
 
-A minimal web-based Arduino simulator built for the FOSSEE OSHW Semester Internship screening task. This tool allows users to visually prototype a simple circuit with an Arduino Uno, an LED, and a Push Button, with automatic wiring and code generation.
+A visually intuitive, web-based Arduino simulator built for prototyping circuits with an Arduino Uno, LEDs, and Push Buttons. This project features a drag-and-drop interface, automatic wiring, real-time code generation, and an interactive simulation environment.
 
-## Features
+## 🚀 Live Demo
+**[View the Live Simulator](https://zruv.github.io/arduino-web-simulator/)**
 
-- **Component Palette**: Drag-and-drop components (Arduino Uno, LED, Push Button) onto the canvas.
-- **Auto-Wiring**: Logical and visual connections are automatically created when components are added.
-- **Configurable Pins**: Change digital pin assignments (D2-D13) via the Properties Inspector.
-- **Auto Code Generation**: Real-time Arduino code generation that reflects pin assignments.
-- **Logic-Level Simulation**: Interactive simulation where a button press controls the LED state.
-- **Modern UI**: Polished dark-mode interface with glassmorphism and responsive design.
+## 🎥 Demo Video
 
-## Tech Stack
+<video src="sim-video.webm" controls="controls" width="100%"></video>
 
-- **Frontend**: React 18, TypeScript, Vite
-- **Styling**: Tailwind CSS
-- **Visualization**: [Wokwi Elements](https://github.com/wokwi/wokwi-elements)
-- **Utilities**: `react-rnd` (Draggable components), `uuid`
+## ✨ Key Features
 
-## Getting Started
+- **Interactive Canvas**: Drag-and-drop components (Arduino Uno, LED, Push Button) from the palette to build your circuit.
+- **Visual & Logical Wiring**: Components automatically connect to the Arduino board with visual wire paths that update as you move elements.
+- **Live Simulation**: Click "Start Simulation" to see your circuit in action. Press the physical button on the canvas to toggle the LED.
+- **Properties Inspector**: 
+  - Assign and change Digital Pins (D2-D13) on the fly.
+  - Delete unwanted components with a single click.
+- **Auto Code Generation**: A real-time `main.cpp` view that updates its logic based on your canvas layout and pin assignments.
+- **Modern Design**: A dark-themed, glassmorphic UI built for a smooth developer experience.
 
-### Prerequisites
+## 🛠️ Tech Stack
 
-- Node.js (v18 or higher recommended)
-- npm or yarn
+- **Framework**: [React 18](https://reactjs.org/) with [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Web Components**: [@wokwi/elements](https://github.com/wokwi/wokwi-elements) for realistic hardware visualization.
+- **Interactions**: `react-rnd` for resizing and dragging.
 
-### Installation
+## 📦 Installation & Setup
 
-1. Clone the repository or extract the project files.
-2. Navigate to the project directory:
+1. **Clone the repository**:
    ```bash
-   cd arduino-simulator
+   git clone https://github.com/zruv/arduino-web-simulator.git
+   cd arduino-web-simulator
    ```
-3. Install dependencies:
+
+2. **Install dependencies**:
    ```bash
    npm install
    ```
 
-### Running the Application
+3. **Run locally**:
+   ```bash
+   npm run dev
+   ```
 
-To start the development server:
-```bash
-npm run dev
-```
-The application will be available at `http://localhost:5173`.
+## 🚢 Deployment
 
-### Building for Production
+This project is configured for **GitHub Actions**. Every time you push to the `main` branch, it automatically builds and deploys to GitHub Pages.
 
-To create a production build:
-```bash
-npm run build
-```
-The output will be in the `dist` folder.
+To set up manually:
+1. Ensure `vite.config.ts` has the correct `base: '/arduino-web-simulator/'`.
+2. Push your code: `git push origin main`.
+3. In GitHub, go to **Settings > Pages** and set **Source** to **GitHub Actions**.
 
-## Submission Details
-
-This project completes all three tasks (Task 1, Task 2, and Task 3) as outlined in the screening task description.
-
-- **Task 1**: Interface & Component Handling
-- **Task 2**: Auto-Wiring & Pin Configuration
-- **Task 3**: Code Generation & Simulation
-
+## 📝 License
+This project was created as part of the FOSSEE OSHW Semester Internship screening task.
