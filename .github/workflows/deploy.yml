@@ -3,8 +3,6 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 permissions:
@@ -23,12 +21,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # --- THE FIX IS HERE ---
       - name: Set up Node
-        uses: actions/setup-node@v4  # <--- FIXED: The correct action name
+        uses: actions/setup-node@v4  # Changed from node-latest to setup-node
         with:
           node-version: 20
           cache: 'npm'
-          # Ensure this path points to where your package-lock.json actually is
           cache-dependency-path: arduino-simulator/package-lock.json
 
       - name: Install dependencies
@@ -45,10 +43,9 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Verify your build script outputs to 'dist'. If using Create React App, change 'dist' to 'build'.
           path: './arduino-simulator/dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
-        
+        uses: actions/deplo
+        y-pages@v4
