@@ -25,15 +25,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          # Cache lines removed to fix the error
+          cache: 'npm'
+          # FIXED: Removed 'arduino-simulator/' prefix
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
         run: npm ci
-        working-directory: arduino-simulator
+        # FIXED: Removed 'working-directory: arduino-simulator' (Assumes package.json is in root)
 
       - name: Build
         run: npm run build
-        working-directory: arduino-simulator
+        # FIXED: Removed 'working-directory: arduino-simulator'
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -41,9 +43,9 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './arduino-simulator/dist'
+          # FIXED: Changed path to just './dist' (or './build' if using React)
+          path: './dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
