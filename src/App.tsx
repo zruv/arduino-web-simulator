@@ -1,13 +1,12 @@
-import { useState, useCallback, useEffect, useMemo } from 'react'; // Added useMemo
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import { Canvas } from './components/Canvas';
 import { Palette } from './components/Palette';
 import { Toolbar } from './components/Toolbar';
 import { CodeView } from './components/CodeView';
-import { PropertiesPanel } from './components/PropertiesPanel'; // Import PropertiesPanel
+import { PropertiesPanel } from './components/PropertiesPanel';
 import type { CanvasComponent, ComponentType } from './types';
 import { v4 as uuidv4 } from 'uuid';
 
-// ... (rest of constants)
 const DEFAULT_PIN_ASSIGNMENTS: Record<ComponentType, number> = {
   'led': 10,
   'button': 2,
@@ -21,25 +20,19 @@ function App() {
   const [isCodeViewVisible, setIsCodeViewVisible] = useState(false);
   const [draggedComponentType, setDraggedComponentType] = useState<ComponentType | null>(null);
   const [isSimulationRunning, setIsSimulationRunning] = useState(false);
-  const [selectedComponentId, setSelectedComponentId] = useState<string | null>(null); // New state
+  const [selectedComponentId, setSelectedComponentId] = useState<string | null>(null);
   const [buttonPressed, setButtonPressed] = useState(false);
   const [ledState, setLedState] = useState(false);
 
-  // Simulation Logic
   useEffect(() => {
     if (isSimulationRunning) {
-      // In a real simulator, we'd parse the code. 
-      // For this task, we hardcode the logic: Button -> LED.
-      // We assume if ANY button is pressed, ALL LEDs turn on (simple logic level).
-      // Or more strictly: Button on Pin X controls LED on Pin Y? 
-      // The requirement says: "Button controls LED".
       if (buttonPressed) {
         setLedState(true);
       } else {
         setLedState(false);
       }
     } else {
-      setLedState(false); // Reset when simulation stops
+      setLedState(false);
       setButtonPressed(false);
     }
   }, [isSimulationRunning, buttonPressed]);
@@ -52,7 +45,6 @@ function App() {
     canvasComponents.filter(c => c.pin !== undefined).map(c => c.pin!)
   , [canvasComponents]);
 
-  // Log canvasComponents whenever it changes
   useEffect(() => {
     console.log('canvasComponents updated:', canvasComponents);
   }, [canvasComponents]);
@@ -72,14 +64,12 @@ function App() {
         height: draggedComponentType === 'arduino-uno' ? 160 : 80,
       };
 
-      // Auto-assign pin for LED and Button
       if (draggedComponentType === 'led' || draggedComponentType === 'button') {
         const defaultPin = DEFAULT_PIN_ASSIGNMENTS[draggedComponentType];
         
         if (defaultPin !== -1 && AVAILABLE_PINS.includes(defaultPin) && !usedPins.includes(defaultPin)) {
           newComponent.pin = defaultPin;
         } else {
-          // If default pin is not available, find the first available pin
           const availablePin = AVAILABLE_PINS.find(pin => !usedPins.includes(pin));
           if (availablePin) {
             newComponent.pin = availablePin;
@@ -90,7 +80,7 @@ function App() {
       }
       console.log('Adding new component:', newComponent);
       setCanvasComponents((prev) => [...prev, newComponent]);
-      setSelectedComponentId(newComponent.id); // Select new component
+      setSelectedComponentId(newComponent.id);
       setDraggedComponentType(null); 
     }
   };
@@ -103,9 +93,16 @@ function App() {
     );
   }, []);
 
+  const handleDeleteComponent = (id: string) => {
+    setCanvasComponents((prev) => prev.filter((c) => c.id !== id));
+    if (selectedComponentId === id) {
+      setSelectedComponentId(null);
+    }
+  };
+
   const toggleSimulation = () => {
     setIsSimulationRunning((prev) => !prev);
-    if (!isSimulationRunning) setSelectedComponentId(null); // Clear selection when simulation starts
+    if (!isSimulationRunning) setSelectedComponentId(null);
   };
 
   return (
@@ -135,6 +132,7 @@ function App() {
           availablePins={AVAILABLE_PINS}
           onPinChange={handlePinChange}
           usedPins={usedPins}
+          onDeleteComponent={handleDeleteComponent}
         />
         {isCodeViewVisible && <CodeView canvasComponents={canvasComponents} />}
       </div>
