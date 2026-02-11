@@ -7,7 +7,7 @@ A visually intuitive, web-based Arduino simulator built for prototyping circuits
 
 ## 🎥 Demo Video
 
-[Watch the Demo Video](sim-video.mp4)
+https://github.com/user-attachments/assets/98135472-97ca-4215-8102-01564a18fa9c
 
 ## ✨ Key Features
 
